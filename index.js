@@ -26,7 +26,7 @@ const Work = mongoose.model("Work", WorkSchema);
 
 /* ---------------- ROUTES ---------------- */
 
-// Home test route
+// Test route
 app.get("/", (req, res) => {
   res.send("Poe API is running 🚀");
 });
@@ -41,7 +41,7 @@ app.get("/works", async (req, res) => {
   }
 });
 
-// GET single work by ID
+// GET one work
 app.get("/works/:id", async (req, res) => {
   try {
     const work = await Work.findById(req.params.id);
@@ -51,7 +51,7 @@ app.get("/works/:id", async (req, res) => {
   }
 });
 
-// POST new work
+// CREATE new work
 app.post("/works", async (req, res) => {
   try {
     const work = new Work(req.body);
@@ -79,8 +79,10 @@ app.delete("/works/:id", async (req, res) => {
   }
 });
 
-/* ---------------- START SERVER ---------------- */
+/* ---------------- START SERVER (IMPORTANT FOR RENDER) ---------------- */
 
-app.listen(3000, () => {
-  console.log("Poe backend running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Poe backend running on port", PORT);
 });
